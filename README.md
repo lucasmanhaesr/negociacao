@@ -4,16 +4,10 @@
 
 ## 2 - Compilação
 
-<p>Para compilar TS para JS:</p>
+<p>Instalação dos modulos:</p>
 
 ```sh
-npm run compile
-```
-
-<p>Para executar o servidor:</p>
-
-```sh
-npm run server
+npm install
 ```
 
 <p>Para executar o servidor em conjunto com o compilador TS em watch:</p>
