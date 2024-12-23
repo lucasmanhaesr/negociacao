@@ -1,4 +1,4 @@
-export class Negociacao {
+export class NegociacaoModel {
     constructor(
         private _data: Date, 
         public readonly quantidade: number, 
