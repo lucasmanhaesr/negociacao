@@ -1,5 +1,6 @@
 import { NegociacaoModel } from '../models/negociacao-model.js';
 import { NegociacaoRepository } from '../repository/negociacao-repository.js';
+import { MensagemView } from '../views/mensagem-view.js';
 import { NegociacaoView } from '../views/negociacao-view.js';
 
 export class NegociacaoController {
@@ -8,18 +9,20 @@ export class NegociacaoController {
     private inputValor: HTMLInputElement;
     private negociacaoRepository = new NegociacaoRepository();
     private negociacaoView = new NegociacaoView("#table-view"); //Instancia da classe View passando o seletor CSS como parametro
+    private mensagemView = new MensagemView("#mensagemView"); //Passando o seletor do elemento HTML
 
     constructor() {
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');
-        this.negociacaoView.update(); //Quem chamar a Controller irá renderizar a tabela
+        this.negociacaoView.update(this.negociacaoRepository); //Quem chamar a Controller irá renderizar a tabela, passando como parametro a lista de negociacoes
     }
 
     adiciona(): void {
         const negociacao = this.criaNegociacao();
-        negociacao.data.setDate(12);
         this.negociacaoRepository.adiciona(negociacao);
+        this.mensagemView.update("Negociação cadastrada com sucesso"); //Passando a mensagem que será mostrada
+        this.negociacaoView.update(this.negociacaoRepository); //A cada evento adicionar será chamado o metodo update() da View
         console.log(this.negociacaoRepository.lista());
         this.limparFormulario();
     }

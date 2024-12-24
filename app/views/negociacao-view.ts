@@ -1,37 +1,40 @@
-export class NegociacaoView{
+import { NegociacaoRepository } from "../repository/negociacao-repository.js";
+import { View } from "./view.js";
 
-    private elemento:HTMLElement;
-
-    //Buscando a div HTML automaticamente ao instanciar a classe NegociacaoView
-    constructor(seletor:string){
-        this.elemento = document.querySelector(seletor);
-    }
+export class NegociacaoView extends View<NegociacaoRepository>{ //Especificando o NegociacaoRepository como tipo que será implementado na função "update(parametro: NegociacaoRepository)"
     
-    //Template que retornará uma String HTML com as variáveis, através de uma template String
-    template():string {
+    //Template que retornará uma String HTML com as variáveis atualizadas, através de um template String
+    template(repository: NegociacaoRepository):string { //Especificando a string como tipo que será implementado na função "update(parametro: string)"
         return `
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>DATA</th>
+                        <th>Data</th>
                         <th>Quantidade</th>
                         <th>Valor</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    ${repository.lista().map(
+                        negociacao => {
+                            return `
+                                <tr>
+                                    <td>${Intl.DateTimeFormat().format(negociacao.data)}</td>
+                                    <td>${negociacao.quantidade}</td>
+                                    <td>R$${negociacao.valor.toFixed(2)}</td>
+                                </tr>
+                            `;
+                        }
+                    ).join("")}
                 </tbody>
             </table>
         `;
     }
 
     //Pega a div HTML e transforma na template
-    update():void {
-        this.elemento.innerHTML = this.template();
+    update(repository: NegociacaoRepository):void {
+        const template = this.template(repository); //passando a lista como parametro para o template iterar
+        this.elemento.innerHTML = template; //A div HTML será substituida pelo template
     }
 
 }
