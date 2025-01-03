@@ -6,8 +6,8 @@ import { DiasDaSemana } from '../enums/dias-da-semana.js';
 export class NegociacaoController {
     constructor() {
         this.negociacaoRepository = new NegociacaoRepository();
-        this.negociacaoView = new NegociacaoView("#table-view"); //Instancia da classe View passando o seletor CSS como parametro
-        this.mensagemView = new MensagemView("#mensagemView"); //Passando o seletor do elemento HTML
+        this.negociacaoView = new NegociacaoView("#table-view", true); //Parametro true para remover tag <script> se conter
+        this.mensagemView = new MensagemView("#mensagemView");
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');

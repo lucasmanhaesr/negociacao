@@ -10,8 +10,8 @@ export class NegociacaoController {
     private inputQuantidade: HTMLInputElement;
     private inputValor: HTMLInputElement;
     private negociacaoRepository = new NegociacaoRepository();
-    private negociacaoView = new NegociacaoView("#table-view"); //Instancia da classe View passando o seletor CSS como parametro
-    private mensagemView = new MensagemView("#mensagemView"); //Passando o seletor do elemento HTML
+    private negociacaoView = new NegociacaoView("#table-view", true); //Parametro true para remover tag <script> se conter
+    private mensagemView = new MensagemView("#mensagemView");
 
     constructor() {
         this.inputData = document.querySelector('#data');
