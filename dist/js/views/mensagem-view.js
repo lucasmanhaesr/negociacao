@@ -6,7 +6,7 @@ export class MensagemView extends View {
             <p class="alert alert-info">${mensagem}</p>
         `;
     }
-    //Função que passa a mensagem com parametro e joga para a template. 
+    //Função que passa a mensagem como parametro e joga para a template. 
     // Usando como parametro o tipo especifico string
     update(mensagem) {
         const template = this.template(mensagem);

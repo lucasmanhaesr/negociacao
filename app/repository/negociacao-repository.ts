@@ -3,11 +3,11 @@ import { NegociacaoModel } from '../models/negociacao-model.js';
 export class NegociacaoRepository {
     private negociacoes: Array<NegociacaoModel> = [];
 
-    adiciona(negociacao: NegociacaoModel) {
+    public adiciona(negociacao: NegociacaoModel): void {
         this.negociacoes.push(negociacao);
     }
 
-    lista(): ReadonlyArray<NegociacaoModel> {
+    public lista(): ReadonlyArray<NegociacaoModel> {
         return this.negociacoes;
     }
 }

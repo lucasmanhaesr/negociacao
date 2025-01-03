@@ -15,7 +15,7 @@ export class NegociacaoView extends View {
                     ${repository.lista().map(negociacao => {
             return `
                                 <tr>
-                                    <td>${Intl.DateTimeFormat().format(negociacao.data)}</td>
+                                    <td>${this.formatarData(negociacao.data)}</td>
                                     <td>${negociacao.quantidade}</td>
                                     <td>R$${negociacao.valor.toFixed(2)}</td>
                                 </tr>
@@ -29,5 +29,9 @@ export class NegociacaoView extends View {
     update(repository) {
         const template = this.template(repository); //passando a lista como parametro para o template iterar
         this.elemento.innerHTML = template; //A div HTML será substituida pelo template
+    }
+    //Criando um método privado que somente essa classe tem acesso para formatar a data no template string
+    formatarData(data) {
+        return Intl.DateTimeFormat().format(data);
     }
 }

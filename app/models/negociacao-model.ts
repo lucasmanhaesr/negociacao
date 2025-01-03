@@ -5,12 +5,20 @@ export class NegociacaoModel {
         public readonly valor: number
     ) {}
 
-    get volume(): number {
+    public get volume(): number {
         return this.quantidade * this.valor;
     }
 
-    get data(): Date {
+    public get data(): Date {
         const data = new Date(this._data.getTime());
         return data;
+    }
+
+    //Método da classe que retorna uma instancia dela mesma
+    public static criarNegociacao(dataInput: string, quantidadeInput: string, valorInput: string): NegociacaoModel{
+        const date = new Date(dataInput.replace(/-/g, ','));
+        const quantidade = parseInt(quantidadeInput);
+        const valor = parseFloat(valorInput);
+        return new NegociacaoModel(date, quantidade, valor);
     }
 }
