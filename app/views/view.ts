@@ -1,12 +1,19 @@
-export abstract class View<t>{ //Generics com o tipo genérico
+export abstract class View<t>{ 
 
-    //Usando protected para permitir herança entre superclasses e subclasses
     protected elemento: HTMLElement;
     private escape = false;
 
-    constructor(seletor: string, escape?: boolean){ //Parametro opcional, só pode ter se conter um obrigatorio!
-        this.elemento = document.querySelector(seletor);
-        if(escape){ //Se o parametro opcional for passado atribuit o parametro a variável
+    constructor(seletor: string, escape?: boolean){
+
+        //Fazendo verificação de valor nulo e fazendo casting
+        const elemento = document.querySelector(seletor);
+        if(elemento){
+            this.elemento = elemento as HTMLElement;
+        } else {
+            throw Error(`Não foi encontrado o seletor ${seletor}`);
+        }
+
+        if(escape){
             this.escape = escape;
         }
     }
@@ -14,12 +21,11 @@ export abstract class View<t>{ //Generics com o tipo genérico
     public update(repository: t):void { 
         let template = this.template(repository);
         if(this.escape){
-            template.replace(/<script>[\s\S]*?<\/script>/, ""); //Regex para remover tag script e tudo que conter dentro dela
+            template.replace(/<script>[\s\S]*?<\/script>/, "");
         }
         this.elemento.innerHTML = template;
     }
 
-    //Usando a função abstrata para forçar a subclasse a implementa-la, protected só pode ser usada na subclasse
     protected abstract template(mensagem: t): string;
 
 }

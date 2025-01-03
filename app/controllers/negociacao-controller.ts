@@ -11,12 +11,12 @@ export class NegociacaoController {
     private inputValor: HTMLInputElement;
     private negociacaoRepository = new NegociacaoRepository();
     private negociacaoView = new NegociacaoView("#table-view", true); //Parametro true para remover tag <script> se conter
-    private mensagemView = new MensagemView("#mensagemView");
+    private mensagemView = new MensagemView("#mensagem-view");
 
     constructor() {
-        this.inputData = document.querySelector('#data');
-        this.inputQuantidade = document.querySelector('#quantidade');
-        this.inputValor = document.querySelector('#valor');
+        this.inputData = document.querySelector('#data') as HTMLInputElement;
+        this.inputQuantidade = <HTMLInputElement> document.querySelector('#quantidade');
+        this.inputValor = document.querySelector('#valor') as HTMLInputElement;
         this.negociacaoView.update(this.negociacaoRepository); //Quem chamar a Controller irá renderizar a tabela, passando como parametro a lista de negociacoes
     }
 

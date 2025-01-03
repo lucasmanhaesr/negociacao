@@ -1,6 +1,5 @@
 import { View } from "./view.js";
 export class NegociacaoView extends View {
-    //Template que retornará uma String HTML com as variáveis atualizadas, através de um template String
     template(repository) {
         return `
             <table class="table table-hover table-bordered">
@@ -25,12 +24,10 @@ export class NegociacaoView extends View {
             </table>
         `;
     }
-    //Pega a div HTML e transforma na template
     update(repository) {
-        const template = this.template(repository); //passando a lista como parametro para o template iterar
-        this.elemento.innerHTML = template; //A div HTML será substituida pelo template
+        const template = this.template(repository);
+        this.elemento.innerHTML = template;
     }
-    //Criando um método privado que somente essa classe tem acesso para formatar a data no template string
     formatarData(data) {
         return Intl.DateTimeFormat().format(data);
     }

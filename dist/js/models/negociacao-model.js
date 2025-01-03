@@ -11,7 +11,6 @@ export class NegociacaoModel {
         const data = new Date(this._data.getTime());
         return data;
     }
-    //Método da classe que retorna uma instancia dela mesma
     static criarNegociacao(dataInput, quantidadeInput, valorInput) {
         const date = new Date(dataInput.replace(/-/g, ','));
         const quantidade = parseInt(quantidadeInput);
